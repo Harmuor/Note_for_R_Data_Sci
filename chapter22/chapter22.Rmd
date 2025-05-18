@@ -1,0 +1,82 @@
+---
+title: "第22章 Rmarkdown输出类型"
+author: "程诚 柏然"
+date: "`r Sys.Date()`"
+output: 
+  html_document:
+    theme: default
+    toc: true
+    toc_float: true
+    toc_depth: 3
+---
+
+不知不觉到了实际上的最后一章了呀。这一章的仪表盘和网站我还是感兴趣的，不过后者应该不咋好整。其实目前对于我这个懒种而言，更不好整的的输出PDF，因为我可能换电脑，懒得装Latex。然后也会略过一些章节，比如调整YAML能输出Word什么的。
+
+# 笔记本
+
+这个由在YAML文件头的outp设置`html_notebook: default`，这个根据书上可以方便同行交流代码，然后修改工作则需要git和github。在YAML设置`github_document: default`，能生成类似README的md文件。然后这个文件同行通过git来修改。
+
+# 生成幻灯片
+
+用Rmd生成幻灯的优点是有效率、方便插入代码。每个一级或二级标题是新幻灯的意思。然后又三种格式的演示文稿
+
+```
+output: 
+  ioslides_presentation  #ioslides 格式的HTML演示文稿。
+  slidy_presentation  #W3C Slidy 格式的HTML演示文稿。
+  beamer_presentation  #LaTeX Beamer 格式的PDF演示文稿。
+```
+
+# 仪表盘
+
+这个感觉还是有点意思的。之前写动机信的标签页其实跟这里就有关。
+
+首先想要生成专门的仪表盘需要在YAML设置
+
+```
+output:
+  flexdashboard::flex_dashboard
+```
+
+然后的规律就是，每个一级标题创建新页、每个二级标题创建新列，每个三级标题创建新行。
+
+还有一点要注意的就是，在上一章不是有讲图片在Rmd中的大小缩放问题么，这里就需要在全局代码段想好setup设置了，书上有使用`knitr::opts_chunk$set(fig.width  = 5, fig.asp = 1/3)`
+
+# 交互元素
+
+这些感觉都和网页搭建有点关系了。话说我学这玩意干嘛。
+
+## htmlwidgets
+
+书上说不需要具备HTML和JS知识也能使用，然后就放了个地图作为了师范，又提了其他几个包能弄交互表格时间序列可视化什么的。
+
+有一说一，这个`leaflet`插入交互图片的这个好，我喜欢。
+
+```{r echo=TRUE}
+library(leaflet) 
+leaflet() %>% 
+setView(114.38777, 30.48948, zoom = 16) %>% 
+addTiles() %>% 
+addMarkers(114.38777, 30.48948, popup = "SCUN")
+```
+
+<p>
+
+## Shiniy
+
+这个也是加交互元素的，但是如果要用来收集资料，又得搞服务器？？？老夫不会啊。反正它也没多少篇幅对吧。
+
+```{r}
+library(shiny) 
+textInput("name", "What is your name?") 
+numericInput("age", "How old are you?", NA, min = 0, max = 150)
+```
+
+
+
+
+# 网站
+
+算了不说了，逐渐进入异次元。
+
+

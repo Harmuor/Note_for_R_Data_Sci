@@ -1,0 +1,19 @@
+/* 设置标题的字体 */
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'SimHei', serif; /* 默认中文黑体 */
+    text-indent: 0; /* 确保标题没有缩进 */}
+
+h1, h2, h3, h4, h5, h6::first-letter {
+    font-family: 'Times New Roman', serif; /* 英文新罗马 */}
+
+/* 设置正文的字体 */
+body, p {
+    font-family: 'Times New Roman', serif; /* 正文字体为新罗马 */
+    text-indent: 2em; /* 正文段落首行缩进2个字符 */}
+
+/* 为 reference 章节设置悬挂缩进 */
+.references, .author {
+    text-indent: 0em; /* 确保reference没有缩进，剩余的交给csl文件 */}
+
+/* 标题等居中 */
+.author, .date, .title, .subtitle { text-align: center; }
